@@ -22,9 +22,9 @@ a js bookmarklet to remove all elements from a page except the one you want to f
 （使用gpt-4-turbo-1106创建，经过一些手动调整。）
 
 ## 如何使用
-1. 打开[`minified.js`文件](https://raw.githubusercontent.com/jerrylususu/mainonly/main/minified.js)，复制其中的所有内容（Ctrl+A），然后使用该内容创建一个书签。
-2. 在网页上，首先点击书签，然后选择你想要关注的元素（它会显示红色轮廓）。滚动以扩大或缩小选择。
-3. 选择完成后，左键单击，所有其他元素现在都被隐藏了。
-4. 按下`ESC`键可以恢复隐藏的元素并将页面恢复到之前的状态。
+1. 打开[`minified.js`文件](https://raw.githubusercontent.com/jerrylususu/mainonly/main/minified.js)，复制其中的所有内容（Ctrl+A），然后创建一个书签，将复制的内容填写到书签地址。
+2. 在网页上，首先点击书签，然后选择你想要关注的元素（被选中的元素会显示显示红色轮廓）。滚动鼠标滚轮可以扩大或缩小选择。
+3. 选择完成后，左键单击，现在其他元素都被隐藏了，页面上只显示选中的元素。
+4. 按下`ESC`键，可以恢复隐藏的元素并将页面恢复到之前的状态。
 
 
