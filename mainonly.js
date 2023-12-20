@@ -26,7 +26,7 @@ javascript: (function () {
     function onClick(event) {
         event.preventDefault();
         if (supportsHas) { // If using :has() selector
-            style.textContent = ":not(.mainonly *, :has(.mainonly)) { display: none; }";
+            style.textContent = ":not(:has(.mainonly), .mainonly, .mainonly *) { display: none; }";
         } else { // In case :has() selector is not supported:
             style.textContent = ":not(.mainonly *, .mainonly-ancestor) { display: none; }";
             var /** @type {HTMLElement | null} */ curr = selectedElement;
