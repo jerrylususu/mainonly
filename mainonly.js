@@ -5,6 +5,7 @@ javascript: (function () {
 
     const style = document.head.appendChild(document.createElement("style"));
     style.textContent = ".mainonly { outline: 2px solid red; }";
+    const supportsHas = CSS.supports('selector(:has(*))');
 
     /** @param {*} element */
     function outlineElement(element) {
@@ -24,12 +25,13 @@ javascript: (function () {
     /** @param {MouseEvent} event */
     function onClick(event) {
         event.preventDefault();
-        // If using :has() selector
-        style.textContent = ":not(.mainonly *, :has(.mainonly)) { display: none; }";
-        // In case :has() selector is not supported:
-        // style.textContent = ":not(.mainonly *, .mainonly-ancestor) { display: none; }";
-        // var /** @type {HTMLElement | null} */ curr = selectedElement;
-        // do { curr.classList.add("mainonly-ancestor"); } while (curr = curr.parentElement);
+        if (supportsHas) { // If using :has() selector
+            style.textContent = ":not(.mainonly *, :has(.mainonly)) { display: none; }";
+        } else { // In case :has() selector is not supported:
+            style.textContent = ":not(.mainonly *, .mainonly-ancestor) { display: none; }";
+            var /** @type {HTMLElement | null} */ curr = selectedElement;
+            do { curr.classList.add("mainonly-ancestor"); } while (curr = curr.parentElement);
+        }
         cleanupEventListeners();
     }
 
@@ -40,10 +42,11 @@ javascript: (function () {
             document.removeEventListener("keydown", onKeydown);
             cleanupEventListeners();
             selectedElement?.classList.remove("mainonly");
-            // In case :has() selector is not supported:
-            // for (const element of document.getElementsByClassName("mainonly-ancestor")) {
-            //     element.classList.remove("mainonly-ancestor");
-            // }
+            if (!supportsHas) { // In case :has() selector is not supported:
+                for (const element of document.getElementsByClassName("mainonly-ancestor")) {
+                    element.classList.remove("mainonly-ancestor");
+                }
+            }
         }
     }
 
