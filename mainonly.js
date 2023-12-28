@@ -2,30 +2,22 @@
 
 (function () {
     // if re-run on the same page, remove the previous instance
-    if (document.getElementById("mainonly")) {
+    if (document.getElementsByClassName("mainonly").length) {
         document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
     }
 
     var selectedElement = document.body;
-    var selectedElementId = selectedElement.id;
-
-    selectedElement.id = "mainonly";
+    selectedElement.classList.add("mainonly");
 
     const style = document.head.appendChild(document.createElement("style"));
-    style.textContent = "#mainonly { outline: 2px solid red; }";
+    style.textContent = ".mainonly { outline: 2px solid red; }";
 
     /** @param {*} element */
     function outlineElement(element) {
         if (element instanceof HTMLElement) { // Ignores non-HTMLElements
-            // keep the id of the selected element
-            if (selectedElementId) {
-                selectedElement.id = selectedElementId;
-            } else {
-                selectedElement.removeAttribute("id");
-            }
+            selectedElement.classList.remove("mainonly");
             selectedElement = element;
-            selectedElementId = selectedElement.id;
-            selectedElement.id = "mainonly";
+            selectedElement.classList.add("mainonly");
         }
     }
 
@@ -37,7 +29,7 @@
     /** @param {MouseEvent} event */
     function onClick(event) {
         event.preventDefault();
-        style.textContent = `* { visibility: hidden; } #mainonly, #mainonly * { visibility: visible; }`;
+        style.textContent = `* { visibility: hidden; } .mainonly, .mainonly * { visibility: visible; }`;
         cleanupEventListeners();
     }
 
@@ -50,12 +42,7 @@
             style.remove();
             document.removeEventListener("keydown", onKeydown);
             cleanupEventListeners();
-            // Restore the id of the selected element
-            if (selectedElementId) {
-                selectedElement.id = selectedElementId;
-            } else {
-                selectedElement.removeAttribute("id");
-            }
+            selectedElement.classList.remove("mainonly");
         }
     }
 
