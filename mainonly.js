@@ -1,11 +1,14 @@
 // A JavaScript bookmarklet designed to isolate and highlight a specific element on a webpage, effectively hiding all other elements.
 
 (function () {
+    // if re-run on the same page, remove the previous instance
     if (document.getElementById("mainonly")) {
         document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
     }
 
     var selectedElement = document.body;
+    var selectedElementId = selectedElement.id;
+
     selectedElement.id = "mainonly";
 
     const style = document.head.appendChild(document.createElement("style"));
@@ -14,8 +17,14 @@
     /** @param {*} element */
     function outlineElement(element) {
         if (element instanceof HTMLElement) { // Ignores non-HTMLElements
-            selectedElement.removeAttribute("id");
+            // keep the id of the selected element
+            if (selectedElementId) {
+                selectedElement.id = selectedElementId;
+            } else {
+                selectedElement.removeAttribute("id");
+            }
             selectedElement = element;
+            selectedElementId = selectedElement.id;
             selectedElement.id = "mainonly";
         }
     }
@@ -41,7 +50,12 @@
             style.remove();
             document.removeEventListener("keydown", onKeydown);
             cleanupEventListeners();
-            selectedElement.removeAttribute("id");
+            // Restore the id of the selected element
+            if (selectedElementId) {
+                selectedElement.id = selectedElementId;
+            } else {
+                selectedElement.removeAttribute("id");
+            }
         }
     }
 
