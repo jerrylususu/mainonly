@@ -2,22 +2,56 @@
 
 (function () {
     // if re-run on the same page, remove the previous instance
-    if (document.getElementsByClassName("mainonly").length) {
+    if (document.getElementById("mainonly")) {
         document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
     }
 
     var selectedElement = document.body;
-    selectedElement.classList.add("mainonly");
+    var lastStrategy = null; // which strategy is used to select the element
+
+    // strategy overview
+    // 1. if the selected element doesn't has `id`, then use `id`
+    // (since it fixed the issue of pure text nodes can not be styled with CSS)
+    // 2. otherwise fallback to use `class`
+    if (!selectedElement.id) {
+        // id
+        lastStrategy = 'id';
+        selectedElement.id = "mainonly";
+    } else {
+        // class
+        lastStrategy = 'class';
+        selectedElement.classList.add("mainonly");
+    }
 
     const style = document.head.appendChild(document.createElement("style"));
-    style.textContent = ".mainonly { outline: 2px solid red; }";
+    style.textContent = "#mainonly { outline: 2px solid red; }  .mainonly { outline: 2px solid red; }";
 
     /** @param {*} element */
     function outlineElement(element) {
         if (element instanceof HTMLElement) { // Ignores non-HTMLElements
-            selectedElement.classList.remove("mainonly");
+            // deselect previous element
+            if (lastStrategy === 'id') {
+                // id
+                selectedElement.removeAttribute("id");
+            } else {
+                // class
+                selectedElement.classList.remove("mainonly");
+            }
+
+            // select the new selected element
             selectedElement = element;
-            selectedElement.classList.add("mainonly");
+
+            if (!selectedElement.id) {
+                // id
+                lastStrategy = 'id';
+                selectedElement.id = "mainonly";
+            } else {
+                // class
+                lastStrategy = 'class';
+                selectedElement.classList.add("mainonly");
+            }
+
+            console.log("strategy=", lastStrategy,"selected", selectedElement);
         }
     }
 
@@ -28,8 +62,15 @@
 
     /** @param {MouseEvent} event */
     function onClick(event) {
+        console.log("clicked & applied!");
         event.preventDefault();
-        style.textContent = `* { visibility: hidden; } .mainonly, .mainonly * { visibility: visible; }`;
+        if (lastStrategy === 'id') {
+            // id
+            style.textContent = `* { visibility: hidden; } #mainonly, #mainonly * { visibility: visible; }`;
+        } else {
+            // class
+            style.textContent = `* { visibility: hidden; } .mainonly, .mainonly * { visibility: visible; }`;
+        }
         cleanupEventListeners();
     }
 
@@ -42,7 +83,14 @@
             style.remove();
             document.removeEventListener("keydown", onKeydown);
             cleanupEventListeners();
-            selectedElement.classList.remove("mainonly");
+            // Restore the selected element to its original state
+            if (lastStrategy === 'id') {
+                // id
+                selectedElement.removeAttribute("id");
+            } else {
+                // class
+                selectedElement.classList.remove("mainonly");
+            }
         }
     }
 
