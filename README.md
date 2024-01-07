@@ -38,6 +38,9 @@ A JavaScript bookmarklet designed to isolate and highlight a specific element on
 ## Is it Safe?
 Yes, it is safe. The code is executed locally on the user's device and does not make any network requests. It only interacts with the webpage that is currently open in the browser.
 
+## What are the limitations?
+
+- In some web pages, other parts of the text content outside the selected element may still be visible. (This issue only occurs when the selected element already has an `id` attribute; it is a limitation of the browser itself and currently has no solution.)
 
 ---
 
@@ -77,3 +80,7 @@ Yes, it is safe. The code is executed locally on the user's device and does not 
 ## 是否安全？
 
 是的，它是安全的。该代码在用户设备上本地执行，不会进行任何网络请求。它只与当前在浏览器中打开的网页进行交互。
+
+## 有什么限制？
+
+- 部分网页中，选中元素之外的其他部分文本内容依然可见。（此问题仅在被选中的元素已有 `id` 属性时出现；这是浏览器本身的限制，暂时没有解决方案。）
