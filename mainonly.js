@@ -50,8 +50,6 @@
                 lastStrategy = 'class';
                 selectedElement.classList.add("mainonly");
             }
-
-            console.log("strategy=", lastStrategy,"selected", selectedElement);
         }
     }
 
@@ -62,7 +60,6 @@
 
     /** @param {MouseEvent} event */
     function onClick(event) {
-        console.log("clicked & applied!");
         event.preventDefault();
         if (lastStrategy === 'id') {
             // id
