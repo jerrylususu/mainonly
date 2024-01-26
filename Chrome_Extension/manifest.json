@@ -1,0 +1,35 @@
+{
+	"manifest_version": 3,
+	"name": "mainonly",
+	"version": "1.0",
+	"description": "",
+	"author": ".",
+	"permissions": [
+		"activeTab",
+		"contextMenus" 
+	],
+	"icons": {
+		"32": "icon.png" 
+	  },
+	"action": {
+		"default_title": "mainonly"
+	  },
+
+	"background":
+	{
+		"service_worker": "background.js"
+	},
+	"content_scripts": 
+	[
+		{
+			"matches": [  "http://*/*", "https://*/*"], 
+			"js": ["content-script.js"],
+			"run_at": "document_end" 
+		}
+	]
+
+	 
+}
+
+ 
+  
