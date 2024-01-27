@@ -132,12 +132,13 @@
             }
         } else if (event.key === ',' || event.key === '-') {
             // up, select parent element
-            console.log("up");
             outlineElement(selectedElement.parentElement);
         } else if (event.key === '.' || event.key === '=') {
-            // down, select first child element
-            console.log("down");
-            outlineElement(selectedElement.firstElementChild);
+            // down, select child element containing the cursor
+            var childElement = selectedElement.querySelector(":hover");
+            if (childElement) {
+                outlineElement(childElement);
+            }
         }
     }
 
@@ -148,8 +149,11 @@
             // Scrolling up, select parent element
             outlineElement(selectedElement.parentElement);
         } else {
-            // Scrolling down, select first child element
-            outlineElement(selectedElement.firstElementChild);
+            // Scrolling down, select child element containing the cursor
+            var childElement = selectedElement.querySelector(":hover");
+            if (childElement) {
+                outlineElement(childElement);
+            }
         }
     }
 
