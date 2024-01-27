@@ -96,12 +96,13 @@
     /** @param {MouseEvent} event */
     function onClick(event) {
         event.preventDefault();
+        markParents();
         if (lastStrategy === 'id') {
             // id
-            style.textContent = `* { visibility: hidden; } #mainonly, #mainonly * { visibility: visible; }`;
+            style.textContent = `* { visibility: hidden; } #mainonly, #mainonly *, .mainonly_parents { visibility: visible; }`;
         } else {
             // class
-            style.textContent = `* { visibility: hidden; } .mainonly, .mainonly * { visibility: visible; }`;
+            style.textContent = `* { visibility: hidden; } .mainonly, .mainonly *, .mainonly_parents { visibility: visible; }`;
         }
         cleanupEventListeners();
         hideGuideOverlay();
@@ -110,6 +111,21 @@
     function hideGuideOverlay() {
         guide.remove();
         guideStyle.remove();
+    }
+
+    function markParents() {
+        var parents = selectedElement;
+        while (parents.parentElement) {
+            parents = parents.parentElement;
+            parents.classList.add("mainonly_parents");
+        }
+    }
+
+    function removeParents() {
+        var parents = document.querySelectorAll(".mainonly_parents");
+        for (var i = 0; i < parents.length; i++) {
+            parents[i].classList.remove("mainonly_parents");
+        }
     }
 
     /** @param {KeyboardEvent} event */
@@ -130,11 +146,12 @@
                 // class
                 selectedElement.classList.remove("mainonly");
             }
+            removeParents();
         } else if (event.key === ',' || event.key === '-') {
             // up, select parent element
             outlineElement(selectedElement.parentElement);
         } else if (event.key === '.' || event.key === '=') {
-            // down, select child element containing the cursor
+            // down, select first child element
             var childElement = selectedElement.querySelector(":hover");
             if (childElement) {
                 outlineElement(childElement);
