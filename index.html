@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MainOnly</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+        }
+        .container {
+            text-align: left;
+            width: 80%;
+            max-width: 800px;
+        }
+        .title {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .description {
+            font-size: 1.2em;
+            margin-bottom: 50px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .bookmarklet-button {
+            cursor: move;
+        }
+        .step {
+            margin-bottom: 30px;
+            display: flex;
+        }
+        .step-number {
+            font-size: 3em;
+            margin-right: 20px;
+        }
+        .step-content {
+            flex-grow: 1;
+        }
+        .step-hint {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        kbd {
+            display: inline-block;
+            padding: 2px 5px;
+            font-size: 0.9em;
+            color: #333;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">MainOnly</div>
+        <div class="description">A JavaScript bookmarklet designed to isolate and highlight a specific element on a webpage, effectively hiding all other elements.</div>
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <div class="step-hint">Install</div>
+                <p>⬇️ Just drag the "mainonly" button to your bookmarks bar. </p>
+                <a class="button bookmarklet-button" href='javascript:(function(){document.getElementById("mainonly")&&document.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape"}));var e=document.body,n=null;e.id?(n="class",e.classList.add("mainonly")):(n="id",e.id="mainonly");let t=document.head.appendChild(document.createElement("style"));t.textContent="#mainonly { outline: 2px solid red; }  .mainonly { outline: 2px solid red; }";let i=document.body.appendChild(document.createElement("div"));i.className="mainonly-guide",i.innerHTML=`<p>正在选择元素。按 <kbd>Esc</kbd> 键取消选择。向下滚动，或按下 <kbd>=</kbd>/<kbd>.</kbd> 键缩小选区。向上滚动，或按下 <kbd>-</kbd>/<kbd>,</kbd> 键扩大选区。</p><p>Selecting element. Press <kbd>Esc</kbd> to cancel selection. Scroll down, or press <kbd>=</kbd>/<kbd>.</kbd> to shrink the selection. Scroll up, or press <kbd>-</kbd>/<kbd>,</kbd>, to expand the selection.</p>`;let o=document.head.appendChild(document.createElement("style"));function l(t){t instanceof HTMLElement&&("id"===n?e.removeAttribute("id"):e.classList.remove("mainonly"),(e=t).id?(n="class",e.classList.add("mainonly")):(n="id",e.id="mainonly"))}function d(e){l(e.target)}function a(i){i.preventDefault(),function n(){for(var t=e;t.parentElement;)(t=t.parentElement).classList.add("mainonly_parents")}(),"id"===n?t.textContent="* { visibility: hidden; } #mainonly, #mainonly *, .mainonly_parents { visibility: visible; }":t.textContent="* { visibility: hidden; } .mainonly, .mainonly *, .mainonly_parents { visibility: visible; }",m(),r()}function r(){i.remove(),o.remove()}function s(i){if(i.preventDefault(),"Escape"===i.key)t.remove(),document.removeEventListener("keydown",s),m(),r(),"id"===n?e.removeAttribute("id"):e.classList.remove("mainonly"),function e(){for(var n=document.querySelectorAll(".mainonly_parents"),t=0;t<n.length;t++)n[t].classList.remove("mainonly_parents")}();else if(","===i.key||"-"===i.key)l(e.parentElement);else if("."===i.key||"="===i.key){var o=e.querySelector(":hover");o&&l(o)}}function c(n){if(n.preventDefault(),n.deltaY<0)l(e.parentElement);else{var t=e.querySelector(":hover");t&&l(t)}}function m(){document.removeEventListener("mouseover",d),document.removeEventListener("click",a),document.removeEventListener("wheel",c)}o.textContent=` .mainonly-guide { position: fixed; top: 0; left: 50%; /* center the box horizontally */ transform: translate(-50%, 0); /* center the box horizontally */ padding: 0.5rem; font-size: 1rem; font-family: sans-serif; text-align: center; color: white; background-color: rgba(0, 0, 0, 0.5); border-radius: 0.5em; z-index: 999999999;     kbd { display: inline-block; padding: 0.1em 0.3em; font-size: 0.8em; line-height: 1; color: #24292e; vertical-align: middle; background-color: #fafbfc; border: 1px solid #d1d5da; border-radius: 3px; box-shadow: inset 0 -1px 0 #d1d5da;     } }`,document.addEventListener("mouseover",d),document.addEventListener("click",a),document.addEventListener("wheel",c,{passive:!1}),document.addEventListener("keydown",s)}())'>mainonly</a>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <div class="step-hint">How to use</div>
+                <p>
+                    <ul>
+                        <li>Click the bookmarklet to activate.</li>
+                        <li>Select the element to focus. This selected element will be encircled with a red outline. Use the scroll wheel or keyboard shortcut (<kbd>-</kbd> <kbd>,</kbd> for expand, <kbd>=</kbd> <kbd>.</kbd> for shrink) to adjust the selection size.</li>
+                        <li>Once you've made a selection, click the left mouse button. All other elements will be hidden, leaving only the selected element visible.</li>
+                        <li>Press <kbd>ESC</kbd> to reveal the hidden elements and revert the page to its original state.</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <div class="step-hint">Try it here</div>
+                <p>Try using the bookmarklet on this page to see how it works.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-content">
+                <div class="step-hint">Check out the Github Repo</div>
+                <p>Found this useful? Or just interested in how it works? Check out the Github repo for more. (Or just add a star)</p>
+                <a class="button" href="https://github.com/jerrylususu/mainonly" style="background-color: #28a745;">⭐ GitHub Repo</a>
+
+                <br>
+                <p>Made with ❤️, built using 🤖</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
