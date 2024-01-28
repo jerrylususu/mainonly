@@ -1,6 +1,6 @@
 # mainonly
 
-[Intro Page](nekonull.me/mainonly/)
+[Intro Page](https://nekonull.me/mainonly/)
 
 A JavaScript bookmarklet designed to isolate and highlight a specific element on a webpage, effectively hiding all other elements.
 
@@ -46,7 +46,7 @@ Yes, it is safe. The code is executed locally on the user's device and does not 
 
 ---
 
-[介绍页面](nekonull.me/mainonly/)
+[介绍页面](https://nekonull.me/mainonly/)
 
 一个 JavaScript 书签工具，专门用于隐藏网页上的非目标元素，仅显示您想要聚焦的元素。
 
