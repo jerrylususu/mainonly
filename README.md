@@ -1,5 +1,5 @@
 # mainonly
-<img align="right" width="200" height="200" src="logo.png">
+<img align="right" width="150" height="150" src="icon.png">
 
 [Intro Page](https://nekonull.me/mainonly/)
 
