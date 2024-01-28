@@ -1,5 +1,7 @@
 # mainonly
 
+[Intro Page](nekonull.me/mainonly/)
+
 A JavaScript bookmarklet designed to isolate and highlight a specific element on a webpage, effectively hiding all other elements.
 
 (Created with GPT-4-turbo-1106 and refined through manual adjustments.)
@@ -43,6 +45,8 @@ Yes, it is safe. The code is executed locally on the user's device and does not 
 - In some web pages, other parts of the text content outside the selected element may still be visible. (This issue only occurs when the selected element already has an `id` attribute; it is a limitation of the browser itself and currently has no solution.)
 
 ---
+
+[介绍页面](nekonull.me/mainonly/)
 
 一个 JavaScript 书签工具，专门用于隐藏网页上的非目标元素，仅显示您想要聚焦的元素。
 
