@@ -65,12 +65,28 @@
             border: 1px solid #ccc;
             border-radius: 3px;
         }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="title">MainOnly</div>
-        <div class="description">A JavaScript bookmarklet designed to isolate and highlight a specific element on a webpage, effectively hiding all other elements.</div>
+        .icon {
+            height: 150px;
+            width: 150px;
+        }
+        .title-and-icon-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .github-button {
+            background-color: #28a745;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+        <div class="title-and-icon-container">
+            <div>
+                <div class="title">MainOnly</div>
+                <div class="description">A JavaScript bookmarklet designed to isolate and highlight a specific element on a webpage, effectively hiding all other elements.</div>
+            </div>
+            <img src="icon.png" alt="MainOnly Icon" class="icon">
+        </div>
         <div class="step">
             <div class="step-number">1</div>
             <div class="step-content">
@@ -104,10 +120,11 @@
             <div class="step-content">
                 <div class="step-hint">Check out the Github Repo</div>
                 <p>Found this useful? Or just interested in how it works? Check out the Github repo for more. (Or just add a star)</p>
-                <a class="button" href="https://github.com/jerrylususu/mainonly" style="background-color: #28a745;">⭐ GitHub Repo</a>
-
-                <br>
-                <p>Made with ❤️, built using 🤖</p>
+                <div style="text-align: center;">
+                    <a class="button github-button" href="https://github.com/jerrylususu/mainonly">⭐ GitHub Repo</a>
+                    <br>
+                    <p>Made with ❤️, built using 🤖</p>
+                </div>
             </div>
         </div>
     </div>
