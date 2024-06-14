@@ -130,8 +130,6 @@
 
     /** @param {KeyboardEvent} event */
     function onKeydown(event) {
-        // Prevent the default action
-        event.preventDefault();
         if (event.key === "Escape") {
             // Recover the hidden elements
             style.remove();
